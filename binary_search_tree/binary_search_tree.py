@@ -23,19 +23,14 @@ class BinarySearchTree:
 
   def contains(self, target):
     current_node = self
-    print("target: ", target)
-    print("current node: ", current_node.value)
     if current_node.value == target:
-      print("IT'S TRUE")
       return True
     if target >= current_node.value:
-      print("RIGHT")
       if current_node.right is not None:
         return current_node.right.contains(target)
       else:
         return False
     else:
-      print("LEFT")
       if current_node.left is not None:
         return current_node.left.contains(target)
       else:
@@ -43,14 +38,17 @@ class BinarySearchTree:
 
   def get_max(self):
     if self.right == None:
-      print(self.value)
       return self.value
     else:
       return self.right.get_max()
 
 
   def for_each(self, cb):
-    pass
+    if self.left is not None:
+      self.left.for_each(cb)
+    if self.right is not None:
+      self.right.for_each(cb)
+    return cb(self.value)
 
 # tree = BinarySearchTree(5)
 # print(tree.value)
